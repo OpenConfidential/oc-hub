@@ -30,10 +30,10 @@
       font-size: 16px;
       line-height: 1.6;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
       min-height: 100vh;
-      padding: 2rem;
+      padding: 4rem 2rem;
     }
 
     main {
@@ -103,6 +103,124 @@
       font-size: 0.8rem;
       color: #4a5568;
       letter-spacing: 0.02em;
+      margin-top: 3.5rem;
+    }
+
+    /* Spectrum section */
+    .spectrum-section {
+      padding-top: 2.5rem;
+    }
+
+    /* Horizontal spectrum line */
+    .spectrum-track {
+      position: relative;
+      margin-bottom: 0;
+    }
+
+    .spectrum-line {
+      position: absolute;
+      top: 7px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .spectrum-points {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .threshold {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+    }
+
+    .threshold:first-child {
+      align-items: flex-start;
+    }
+
+    .threshold:last-child {
+      align-items: center;
+    }
+
+    .threshold-dot {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      border: 1px solid;
+      background: var(--bg);
+      margin-bottom: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .threshold:nth-child(1) .threshold-dot,
+    .threshold:nth-child(2) .threshold-dot,
+    .threshold:nth-child(3) .threshold-dot {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(58, 123, 213, 0.12);
+    }
+
+    .threshold-content {
+      max-width: 160px;
+    }
+
+    .threshold:first-child .threshold-content {
+      margin-left: 0;
+    }
+
+    .threshold:last-child .threshold-content {
+      text-align: center;
+    }
+
+    .threshold-name {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .threshold-name { color: var(--accent); }
+
+    .threshold-desc {
+      font-size: 0.775rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+
+    @media (max-width: 540px) {
+      .spectrum-line {
+        display: none;
+      }
+
+      .spectrum-points {
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .threshold,
+      .threshold:first-child,
+      .threshold:last-child {
+        align-items: flex-start;
+        flex-direction: row;
+        gap: 1rem;
+      }
+
+      .threshold-dot {
+        margin-bottom: 0;
+        margin-top: 3px;
+      }
+
+      .threshold-content,
+      .threshold:last-child .threshold-content {
+        text-align: left;
+        max-width: none;
+      }
     }
 
   </style>
@@ -121,12 +239,41 @@
     <div class="divider"></div>
 
     <p class="body-text">
-      Confidential computing is not binary. The hardware exists. The protections vary.
-      Most customers enable a confidential resource — a VM, a container, an AI inference
-      endpoint — check a compliance box, and assume they are protected. In practice, the
-      actual level of confidentiality depends on configuration choices that cloud
-      vendors rarely surface clearly. OpenConfidential is the clarity layer.
+      Confidential computing is not binary. The hardware exists. The protections vary. Many customers enable a confidential resource — a VM, a container, an AI inference endpoint — check a compliance box if required, and assume they are protected. In practice, the actual level of confidentiality depends on configuration choices that cloud vendors rarely surface clearly. OpenConfidential is the clarity layer.
     </p>
+
+    <section class="spectrum-section">
+      <div class="spectrum-track">
+        <div class="spectrum-line"></div>
+        <div class="spectrum-points">
+
+          <div class="threshold">
+            <div class="threshold-dot"></div>
+            <div class="threshold-content">
+              <div class="threshold-name">Compute Access</div>
+              <p class="threshold-desc">Hardware-based Trusted Execution Environments encrypt memory and isolate execution at the CPU level. Protects your data and code during processing — from memory dumps, other tenants, the host OS, and the hypervisor.</p>
+            </div>
+          </div>
+
+          <div class="threshold">
+            <div class="threshold-dot"></div>
+            <div class="threshold-content">
+              <div class="threshold-name">Cloud Provider Access</div>
+              <p class="threshold-desc">With proper attestation and customer-controlled key management, your cloud provider cannot access your data in use. This threshold requires deliberate configuration — it may not be the default.</p>
+            </div>
+          </div>
+
+          <div class="threshold">
+            <div class="threshold-dot"></div>
+            <div class="threshold-content">
+              <div class="threshold-name">Law Enforcement and National Security Access</div>
+              <p class="threshold-desc">The frontier of the spectrum. Jurisdiction, provider policy, key sovereignty, and hardware attestation all affect exposure. It's possible that no configuration eliminates this risk entirely — but some reduce it significantly.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
 
     <p class="tagline-footer">Open source. Open standards. Openly honest about what confidential computing protects.</p>
 
